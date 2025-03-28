@@ -5,12 +5,12 @@ workflows:
       flutter: stable
       xcode: latest
       vars:
-        BUNDLE_ID: "com.yourcompany.yourapp"  # Replace with your iOS Bundle ID
-        PACKAGE_NAME: "com.yourcompany.yourapp"  # Replace with your Android Package Name
+        BUNDLE_ID: "com.yourcompany.yourapp"    # Replace with your iOS Bundle ID
+        PACKAGE_NAME: "com.yourcompany.yourapp" # Replace with your Android Package Name
         FIREBASE_APP_ID: "1:1234567890:android:abc123"  # Replace with your Firebase App ID
       groups:
         - app_store_credentials  # iOS API Key group in Codemagic
-        - firebase_credentials  # Firebase credentials group in Codemagic
+        - firebase_credentials   # Firebase credentials group in Codemagic
     triggering:
       events:
         - push
@@ -38,13 +38,11 @@ workflows:
       - build/ios/iphoneos/*.ipa   # iOS artifact
     publishing:
       app_store_connect:
-        api_key: $APP_STORE_CONNECT_PRIVATE_KEY  # Use the Codemagic API key
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY  
         key_id: $APP_STORE_CONNECT_KEY_ID
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
-        release_type: beta
+        release_type: MANUAL   # ✅ Correct release type
       firebase:
         firebase_service_account: $FIREBASE_CREDENTIALS
-        groups:
-          - internal-testers
-        artifact_type: "apk"
+        # ✅ Removed invalid fields
